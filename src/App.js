@@ -1,22 +1,21 @@
-// src/App.js
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './index.css';
-import Navbar from './components/Navbar';
-import Dashboard from './pages/Dashboard';
-import Upload from './pages/Upload';
-import Analytics from './pages/Analytics';
-import Vendors from './pages/Vendors';
+import Dashboard from "./pages/Dashboard";
+import Analytics from "./pages/Analytics";
+import Vendors from "./pages/Vendors";
+import Navbar from "./components/Navbar";
+import { useState } from "react";
 
-export default function App() {
+function App() {
+  const [page, setPage] = useState("dashboard");
+
   return (
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/upload" element={<Upload />} />
-        <Route path="/analytics" element={<Analytics />} />
-        <Route path="/vendors" element={<Vendors />} />
-      </Routes>
-    </BrowserRouter>
+    <div>
+      <Navbar setPage={setPage} />
+
+      {page === "dashboard" && <Dashboard />}
+      {page === "analytics" && <Analytics />}
+      {page === "vendors" && <Vendors />}
+    </div>
   );
 }
+
+export default App;
